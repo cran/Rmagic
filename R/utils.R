@@ -9,20 +9,36 @@ null_equal <- function(x, y) {
   }
 }
 
-load_pymagic <- function() {
-  pymagic <<- reticulate::import("magic", delay_load = TRUE)
+load_pymagic <- function(delay_load = FALSE) {
+  if (is.null(pymagic)) {
+    result <- try(pymagic <<- reticulate::import("magic", delay_load = delay_load))
+  } else {
+    result <- try(reticulate::import("magic", delay_load = delay_load))
+  }
+  if (methods::is(result, "try-error")) {
+    if ((!delay_load) && length(grep("ModuleNotFoundError: No module named 'magic'", result)) > 0 ||
+        length(grep("ImportError: No module named magic", result)) > 0) {
+      if (utils::menu(c("Yes", "No"), title="Install MAGIC Python package with reticulate?") == 1) {
+        install.magic()
+      }
+    } else if (length(grep("r\\-reticulate", reticulate::py_config()$python)) > 0) {
+      message("Consider removing the 'r-reticulate' environment by running:")
+      if (grep("virtualenvs", reticulate::py_config()$python)) {
+        message("reticulate::virtualenv_remove('r-reticulate')")
+      } else {
+        message("reticulate::conda_remove('r-reticulate')")
+      }
+    }
+  }
 }
 
-#' Install PHATE Python Package
+#' Install MAGIC Python Package
 #'
-#' Install PHATE Python package into a virtualenv or conda env.
+#' Install MAGIC Python package into a virtualenv or conda env.
 #'
 #' On Linux and OS X the "virtualenv" method will be used by default
 #' ("conda" will be used if virtualenv isn't available). On Windows,
 #' the "conda" method is always used.
-#' As of reticulate v1.7, this functionality is only available in the
-#' development version of reticulate, which can be installed using
-#' `devtools::install_github('rstudio/reticulate')`
 #'
 #' @param envname Name of environment to install packages into
 #' @param method Installation method. By default, "auto" automatically finds
@@ -38,14 +54,26 @@ load_pymagic <- function() {
 #' @export
 install.magic <- function(envname = "r-reticulate", method = "auto",
                           conda = "auto", pip=TRUE, ...) {
-  stop(paste0(
-      "Cannot install MAGIC, please install from a console with ",
-      "pip install --user git+git://github.com/KrishnaswamyLab/MAGIC.git#subdirectory=python"
+  message("Attempting to install MAGIC python package with reticulate")
+  tryCatch({
+    reticulate::py_install("magic-impute",
+      envname = envname, method = method,
+      conda = conda, pip=pip, ...
+    )
+    message("Install complete. Please restart R and try again.")
+  },
+  error = function(e) {
+    stop(paste0(
+      "Cannot locate MAGIC Python package, please install through pip ",
+      "(e.g. pip install magic-impute) and then restart R."
     ))
+  }
+  )
 }
 
 pymagic <- NULL
 
 .onLoad <- function(libname, pkgname) {
-  load_pymagic()
+  py_config <- reticulate::py_discover_config(required_module = "magic")
+  load_pymagic(delay_load = TRUE)
 }

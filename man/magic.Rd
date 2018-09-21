@@ -4,9 +4,10 @@
 \alias{magic}
 \title{Perform MAGIC on a data matrix}
 \usage{
-magic(data, genes = NULL, k = 10, alpha = 15, t = "auto", npca = 100,
-  init = NULL, t.max = 20, knn.dist.method = "euclidean", verbose = 1,
-  n.jobs = 1, seed = NULL)
+magic(data, genes = NULL, k = 10, alpha = 15, t = "auto",
+  npca = 100, init = NULL, t.max = 20,
+  knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
+  seed = NULL)
 }
 \arguments{
 \item{data}{input data matrix}
@@ -27,7 +28,7 @@ power to which the diffusion operator is powered
 sets the level of diffusion. If 'auto', t is selected according to the
 Procrustes disparity of the diffused data.'}
 
-\item{npca}{number of PCA components that should be used; default: 20.}
+\item{npca}{number of PCA components that should be used; default: 100.}
 
 \item{init}{magic object, optional
 object to use for initialization. Avoids recomputing
@@ -60,7 +61,7 @@ applied to single-cell RNA sequencing data, as described in
 van Dijk et al, 2018.
 }
 \examples{
-if (reticulate::py_module_available("phate")) {
+if (reticulate::py_module_available("magic")) {
 
 data(magic_testdata)
 

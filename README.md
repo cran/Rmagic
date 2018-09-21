@@ -1,8 +1,9 @@
-Rmagic v1.0.0
+Rmagic v1.3.0
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Latest PyPI version](https://img.shields.io/pypi/v/magic-impute.svg)](https://pypi.org/project/magic-impute/)
 [![Latest CRAN version](https://img.shields.io/cran/v/Rmagic.svg)](https://cran.r-project.org/package=Rmagic)
 [![Travis CI
 Build](https://api.travis-ci.com/KrishnaswamyLab/MAGIC.svg?branch=master)](https://travis-ci.com/KrishnaswamyLab/MAGIC)
@@ -36,8 +37,8 @@ Diffusion*, Cell
   - You can view further examples of MAGIC on real data in our notebooks
     under
         `inst/examples`:
-      - <https://github.com/KrishnaswamyLab/MAGIC/blob/master/Rmagic/inst/examples/EMT_tutorial.md>
-      - <https://github.com/KrishnaswamyLab/MAGIC/blob/master/Rmagic/inst/examples/bonemarrow_tutorial.md>
+      - <http://htmlpreview.github.io/?https://github.com/KrishnaswamyLab/MAGIC/blob/master/Rmagic/inst/examples/emt_tutorial.html>
+      - <http://htmlpreview.github.io/?https://github.com/KrishnaswamyLab/MAGIC/blob/master/Rmagic/inst/examples/bonemarrow_tutorial.html>
 
 ### Installation
 
@@ -59,7 +60,7 @@ In a terminal, run the following command to install the Python
 repository.
 
 ``` bash
-pip install --user git+git://github.com/KrishnaswamyLab/MAGIC.git#subdirectory=python
+pip install --user magic-impute
 ```
 
 #### Installaton from source
@@ -235,4 +236,7 @@ ggplot(data_PHATE) +
 
 ## Help
 
-If you have any questions or require assistance using MAGIC, please contact us at <https://krishnaswamylab.org/get-help>.
+Please let us know of any issues at the [GitHub
+repo](https://github.com/KrishnaswamyLab/MAGIC/issues). If you have any
+questions or require assistance using MAGIC, please read the documentation
+by running `help(Rmagic::magic)` or contact us at <https://krishnaswamylab.org/get-help>.
