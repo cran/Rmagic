@@ -1,11 +1,11 @@
-47824775e3994bd1f9519712ee6071c8 *DESCRIPTION
+f1c838a25f7c51a8b8dbb3edcbe84935 *DESCRIPTION
 d437277f55afee75ebe74b04a6955810 *LICENSE
 7c54d7d51e03e516cf01c8f03ede6b78 *NAMESPACE
-67b8a64a64c80d07b313bb33bb82202b *R/magic.R
+5782b3aa02834aad7f55ae3a0a7f69f8 *R/magic.R
 31ba6b32900d40684a7e47ebeddf7820 *R/magic_testdata.R
 fd3fa4517e739a6c584ffe9918184ff3 *R/preprocessing.R
-c9315e6d3b2f3790abbb52d71e9d715f *R/utils.R
-185bed892136ac286e8cfdfff8d1873e *README.md
+fd78f2826425c6744362f4bf21f5f550 *R/utils.R
+bc292d9549b4c37f598c59a1befe849a *README.md
 f1914898ccb1478dc022ac9215487bae *data/magic_testdata.rda
 80f8d38625da26c6f5cfb0633a18dcba *inst/CITATION
 0acc3161bdcbc2b131115f3767c6f69e *inst/examples/BMMSC_data_R_after_magic.png
