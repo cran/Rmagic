@@ -2,24 +2,44 @@
 % Please edit documentation in R/magic.R
 \name{magic}
 \alias{magic}
+\alias{magic.default}
+\alias{magic.seurat}
+\alias{magic.Seurat}
 \title{Perform MAGIC on a data matrix}
 \usage{
-magic(data, genes = NULL, k = 10, alpha = 15, t = "auto",
-  npca = 100, init = NULL, t.max = 20,
+magic(data, ...)
+
+\method{magic}{default}(data, genes = NULL, knn = 10, knn.max = NULL,
+  decay = 2, t = "auto", npca = 100, init = NULL, t.max = 20,
   knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
-  seed = NULL)
+  seed = NULL, k = NULL, alpha = NULL, ...)
+
+\method{magic}{seurat}(data, genes = NULL, knn = 10, knn.max = NULL,
+  decay = 2, t = "auto", npca = 100, init = NULL, t.max = 20,
+  knn.dist.method = "euclidean", verbose = 1, n.jobs = 1,
+  seed = NULL, ...)
+
+\method{magic}{Seurat}(data, assay = NULL, genes = NULL, knn = 10,
+  knn.max = NULL, decay = 2, t = "auto", npca = 100, init = NULL,
+  t.max = 20, knn.dist.method = "euclidean", verbose = 1,
+  n.jobs = 1, seed = NULL, ...)
 }
 \arguments{
-\item{data}{input data matrix}
+\item{data}{input data matrix or Seurat object}
+
+\item{...}{Arguments passed to and from other methods}
 
 \item{genes}{character or integer vector, default: NULL
 vector of column names or column indices for which to return smoothed data
 If 'all_genes' or NULL, the entire smoothed matrix is returned}
 
-\item{k}{int, optional, default: 10
-number of nearest neighbors on which to build kernel}
+\item{knn}{int, optional, default: 10
+number of nearest neighbors on which to compute bandwidth}
 
-\item{alpha}{int, optional, default: 15
+\item{knn.max}{int, optional, default: NULL
+maximum number of neighbors for each point. If NULL, defaults to 3*knn}
+
+\item{decay}{int, optional, default: 2
 sets decay rate of kernel tails.
 If NULL, alpha decaying kernel is not used}
 
@@ -53,6 +73,18 @@ For n_jobs below -1, (n.cpus + 1 + n.jobs) are used. Thus for
 n_jobs = -2, all CPUs but one are used}
 
 \item{seed}{int or `NULL`, random state (default: `NULL`)}
+
+\item{k}{Deprecated. Use `knn`.}
+
+\item{alpha}{Deprecated. Use `decay`.}
+
+\item{assay}{Assay to use for imputation, defaults to the default assay}
+}
+\value{
+If a Seurat object is passed, a Seurat object is returned. Otherwise, a "magic" object containing:
+ * **result**: matrix containing smoothed expression values
+ * **operator**: The MAGIC operator (python magic.MAGIC object)
+ * **params**: Parameters passed to magic
 }
 \description{
 Markov Affinity-based Graph Imputation of Cells (MAGIC) is an
@@ -61,7 +93,7 @@ applied to single-cell RNA sequencing data, as described in
 van Dijk et al, 2018.
 }
 \examples{
-if (reticulate::py_module_available("magic")) {
+if (pymagic_is_available()) {
 
 data(magic_testdata)
 
@@ -87,6 +119,24 @@ if (require(ggplot2)) {
 data_magic <- magic(magic_testdata, genes="all_genes", init=data_magic)
 # Extract the smoothed data matrix to use in downstream analysis
 data_smooth <- as.matrix(data_magic)
+
+}
+
+if (pymagic_is_available() && require(Seurat)) {
+
+data(magic_testdata)
+
+# Create a Seurat object
+seurat_object <- CreateSeuratObject(counts = t(magic_testdata), assay="RNA")
+seurat_object <- NormalizeData(object = seurat_object)
+seurat_object <- ScaleData(object = seurat_object)
+
+# Run MAGIC and reset the active assay
+seurat_object <- magic(seurat_object)
+seurat_object@active.assay = "MAGIC_RNA"
+
+# Analyze with Seurat
+VlnPlot(seurat_object, features=c("VIM", "ZEB1", "CDH1"))
 
 }
 
