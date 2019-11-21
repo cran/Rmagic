@@ -1,10 +1,10 @@
-73be472405d806686a7cd16b5da104d9 *DESCRIPTION
+2bf990302d4e234ed290617c7e20cfea *DESCRIPTION
 2c1c00f9d3ed9e24fa69b932b7e7aff2 *LICENSE
-40f384d6cc99780590b2616d489a5191 *NAMESPACE
-4476de109fa2aad78dbde9cdc4f2850d *R/magic.R
+b49be105bdd29fb35b6cb8b049a811f6 *NAMESPACE
+dfb452a0984cd92ce6611dddcc589b93 *R/magic.R
 391b3b5edb18e9bfdc00aabbdd145347 *R/magic_testdata.R
 915ebfd975177739ca0bd05b3854ebed *R/preprocessing.R
-783537496d43e79191935f38ad214d9f *R/utils.R
+0a735d366870fb81bc7a4eac8a55fdba *R/utils.R
 3928ad314368fd4c7093c4f0f09038f4 *README.md
 f1914898ccb1478dc022ac9215487bae *data/magic_testdata.rda
 db1f3c4590e4a914535cc73a52f3bd78 *inst/CITATION
@@ -16,9 +16,9 @@ a917c672af4a052b5ef5b5db717c22d7 *inst/examples/BMMSC_data_R_before_magic.png
 11a44c92915e525302ce69e8f2c74e94 *inst/examples/EMT_data_R_before_magic.png
 68de3a313b45cd113eaad09ccfb657f6 *inst/examples/EMT_data_R_pca_colored_by_magic.png
 44df788949c73b66719d8c200a3163f7 *inst/examples/EMT_data_R_phate_colored_by_magic.png
-fb900dc16ffc3c369882e8750ef34fe9 *inst/examples/bonemarrow_tutorial.Rmd
+2a935b438012defd13dbffc12dd3bdb5 *inst/examples/bonemarrow_tutorial.Rmd
 8273145b76e78eb7379c3ae5438a804f *inst/examples/bonemarrow_tutorial.html
-e97c7f3db5c48cd0074f44ec2757ff11 *inst/examples/emt_tutorial.Rmd
+a660fe769a76868389a4504c9f0a1fd4 *inst/examples/emt_tutorial.Rmd
 94bac446556548f5fcf3511c947c6185 *inst/examples/emt_tutorial.html
 f4432155896898a155706faa2d28ea4d *man/as.data.frame.Rd
 6fdb0bc43d4c0bffcd8703564e7dcaeb *man/as.matrix.Rd
@@ -32,7 +32,7 @@ d2213e922290207b36be52ca0ce09f4f *man/figures/README-run_phate-1.png
 de7d734d43bb9766d7fc30f8ebe0dd4e *man/ggplot.Rd
 8948dcaafa4b2986e5f2f946f92c6d87 *man/install.magic.Rd
 763bb1f66955933bc32c92a4e93c5a3f *man/library.size.normalize.Rd
-f29e085386e4a2d29ff5eb8b80d8091f *man/magic.Rd
+3c50f8ac80cd2ac33ec0e373d8bf0697 *man/magic.Rd
 25d44db9406b26e3694859ce52741ef2 *man/magic_testdata.Rd
 5a7c9ffeb5c00e878113a53c743688b8 *man/print.Rd
 77624b677d00d2b2effa86772ec35896 *man/pymagic_is_available.Rd
